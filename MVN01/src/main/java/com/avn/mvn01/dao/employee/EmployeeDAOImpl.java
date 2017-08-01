@@ -6,10 +6,17 @@
 package com.avn.mvn01.dao.employee;
 
 import com.avn.mvn01.model.Employee;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 /**
  *
@@ -24,9 +31,23 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private JdbcTemplate jdbcTemplateObject;
 
     @Override
-    public Employee save(Employee employee) throws SQLException {
-        String SQL = "INSERT INTO EMPLOYEE (name, status) values (?, ?)";
-      jdbcTemplateObject.update( SQL, employee.getName(), employee.getStatus());
+    public Employee save(final Employee employee) throws SQLException {
+        final String SQL = "INSERT INTO EMPLOYEE (name, status) values (?, ?)";
+//      jdbcTemplateObject.update( SQL, employee.getName(), employee.getStatus());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplateObject.update(
+                new PreparedStatementCreator() {
+                    public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                        PreparedStatement ps = connection.prepareStatement(SQL, new String[]{"id"});
+                        ps.setString(1, employee.getName());
+                        ps.setInt(2, employee.getStatus());
+                        return ps;
+                    }
+                }, keyHolder);
+        
+        employee.setId(keyHolder.getKey().intValue());
+
         return employee;
     }
 

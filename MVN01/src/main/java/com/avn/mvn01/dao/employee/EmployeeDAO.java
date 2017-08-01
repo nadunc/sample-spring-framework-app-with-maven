@@ -16,7 +16,7 @@ import javax.sql.DataSource;
  */
 public interface EmployeeDAO {
 
-    public Employee save(Employee employee) throws SQLException;
+    public Employee save(final Employee employee) throws SQLException;
 
     public Employee update(Employee employee) throws SQLException;
 

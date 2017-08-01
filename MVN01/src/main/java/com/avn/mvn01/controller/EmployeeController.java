@@ -29,6 +29,7 @@ public class EmployeeController {
     public String addEmployee(Employee employee) {
         try {
             employeeService.save(employee);
+            System.out.println(employee.getId());
             return "Employee Saved.";
         } catch (SQLException sqle) {
             return "Employee Save Failed.";
