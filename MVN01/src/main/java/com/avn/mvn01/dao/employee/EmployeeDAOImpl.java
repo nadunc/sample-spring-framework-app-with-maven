@@ -25,6 +25,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public Employee save(Employee employee) throws SQLException {
+        String SQL = "INSERT INTO EMPLOYEE (name, status) values (?, ?)";
+      jdbcTemplateObject.update( SQL, employee.getName(), employee.getStatus());
         return employee;
     }
 

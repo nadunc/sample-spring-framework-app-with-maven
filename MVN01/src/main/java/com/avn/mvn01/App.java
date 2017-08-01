@@ -11,6 +11,7 @@ import com.avn.mvn01.model.Employee;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
@@ -28,7 +29,10 @@ public class App {
         
         EmployeeController employeeController = (EmployeeController) context.getBean("EmployeeController");
 
-        System.out.println(employeeController.addEmployee(new Employee()));
+        Employee emp = new Employee();
+        emp.setName("Nadun");
+        emp.setStatus(1);
+        System.out.println(employeeController.addEmployee(emp));
         
         Scanner sc = new Scanner(System.in);
         System.out.println("Menu");
