@@ -5,8 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security
@@ -20,23 +20,23 @@ and open the template in the editor.
 
     <context:component-scan base-package="com.avn.mvn01" />
 
-    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-        <beans:property name="url" value="jdbc:mysql://localhost:3306/spring_emp" />  
-        <beans:property name="username" value="root" />  
-        <beans:property name="password" value="" />  
-    </beans:bean> 
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+        <property name="url" value="jdbc:mysql://localhost:3306/spring_emp" />  
+        <property name="username" value="root" />  
+        <property name="password" value="" />  
+    </bean> 
             
-    <beans:bean id="EmployeeController" class="com.avn.mvn01.controller.EmployeeController">
-    </beans:bean>
+    <bean id="EmployeeController" class="com.avn.mvn01.controller.EmployeeController">
+    </bean>
 
-    <beans:bean id="EmployeeDAO" class="com.avn.mvn01.dao.employee.EmployeeDAOImpl">
-        <beans:property name="dataSource" ref="dataSource"/>
-    </beans:bean>
+    <bean id="EmployeeDAO" class="com.avn.mvn01.dao.employee.EmployeeDAOImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
     
     
     
-    <!--    <beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
-        <beans:property name="dataSource" ref="dataSource"/>
-    </beans:bean>  -->
-</beans:beans>
+    <!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+        <property name="dataSource" ref="dataSource"/>
+    </bean>  -->
+</beans>
