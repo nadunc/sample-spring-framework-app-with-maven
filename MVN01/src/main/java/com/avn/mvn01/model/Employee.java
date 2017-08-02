@@ -16,18 +16,18 @@ import java.util.Date;
 
  */
 public class Employee {
-    private int id;
+    private long id;
     private String name;
     private int status;
     private Date created_date;
     private Date last_updated_date;
     private int created_user;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -71,5 +71,8 @@ public class Employee {
         this.created_user = created_user;
     }
     
-    
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

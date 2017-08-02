@@ -13,5 +13,9 @@ import java.sql.SQLException;
  * @author stephen.silver
  */
 public interface EmployeeService {
-    public long[] save(Employee employee) throws SQLException;
+    public long[] save(Employee employee) throws Exception;
+    
+    public Employee findById(long employeeId) throws Exception;
+    
+    public void update(Employee employee) throws Exception;
 }

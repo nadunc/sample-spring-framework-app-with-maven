@@ -5,10 +5,13 @@
  */
 package com.avn.mvn01.dao.systemuser;
 
+import com.avn.mvn01.model.SystemUser;
+import java.sql.SQLException;
+
 /**
  *
  * @author stephen.silver
  */
 public interface SystemUserDAO {
-//    private int save();
+    public long save(final SystemUser systemUser) throws Exception;
 }

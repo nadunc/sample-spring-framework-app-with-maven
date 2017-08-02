@@ -19,21 +19,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  */
 public class App {
-
+    
     private static ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-
+    
     public static void main(String[] args) {
-
+        
         Scanner sc = new Scanner(System.in);
         boolean showMenu = true;
         do {
             System.out.println("------ Menu ------");
-
+            
             System.out.println("1. Insert employee");
             System.out.println("2. Update employee");
             System.out.println("3. Search employee");
             System.out.println("99. Exit");
-
+            
             System.out.print("Enter selection : ");
             String selection = sc.next();
             switch (selection) {
@@ -56,10 +56,10 @@ public class App {
             System.out.println();
         } while (showMenu);
     }
-
+    
     private static void insertEmplpoyee() {
         System.out.println("Insert");
-
+        
         EmployeeController employeeController = (EmployeeController) context.getBean("employeeController");
 //
         Employee emp = new Employee();
@@ -67,11 +67,23 @@ public class App {
         emp.setStatus(1);
         System.out.println(employeeController.addEmployee(emp));
     }
-
+    
     private static void updateEmployee() {
         System.out.println("Update");
+        Scanner sc = new Scanner(System.in);
+        
+        EmployeeController employeeController = (EmployeeController) context.getBean("employeeController");
+        System.out.print("Enter employee id: ");
+        long employeeId = sc.nextLong();
+        Employee employee = employeeController.findById(employeeId);
+        //System.out.println(employee.toString());
+        System.out.print("Enter employee name: ");
+        String name = sc.next();
+        
+        employee.setName(name);
+        employeeController.update(employee);
     }
-
+    
     private static void searchEmployee() {
         System.out.println("Search");
     }

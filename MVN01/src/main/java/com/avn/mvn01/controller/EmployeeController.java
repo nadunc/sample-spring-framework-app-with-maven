@@ -29,8 +29,26 @@ public class EmployeeController {
             employeeService.save(employee);
             System.out.println(employee.getId());
             return "Employee Saved.";
-        } catch (SQLException sqle) {
+        } catch (Exception e) {
             return "Employee Save Failed.";
+        }
+    }
+    
+    public Employee findById(long employeeId){
+        try {
+            return employeeService.findById(employeeId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    public String update(Employee employee){
+        try {
+            employeeService.update(employee);
+            return "Employee updated";
+        } catch (Exception e) {
+            return "Employee update failed";
         }
     }
 }

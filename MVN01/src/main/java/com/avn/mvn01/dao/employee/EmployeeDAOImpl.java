@@ -8,6 +8,7 @@ package com.avn.mvn01.dao.employee;
 import com.avn.mvn01.model.Employee;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -34,7 +36,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private DataSource dataSource;
 
     @Override
-    public long save(final Employee employee) throws SQLException {
+    public long save(final Employee employee) throws Exception {
         final String SQL = "INSERT INTO EMPLOYEE (name, status) values (?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -52,13 +54,35 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void update(Employee employee) throws SQLException {
-        new JdbcTemplate().update("", new Object[]{employee.getName(), employee.getStatus()});
+    public void update(Employee employee) throws Exception {
+        new JdbcTemplate(dataSource).update(
+                "update employee set name = ? where id = ?",
+                employee.getName(), employee.getId());
     }
 
     @Override
     public List<Employee> search(String key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Employee findById(final long employeeId) throws Exception {
+
+        Employee employee = new JdbcTemplate(dataSource).queryForObject(
+                "SELECT name, status, created_date, last_updated_date, created_user from employee where id = ?", new Object[]{employeeId},
+                new RowMapper<Employee>() {
+                    public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                        Employee employee = new Employee();
+                        employee.setId(employeeId);
+                        employee.setName(rs.getString("name"));
+//                TODO
+//                actor.setLastName(rs.getString("last_name"));
+                        return employee;
+                    }
+                });
+
+        return employee;
     }
 
 }

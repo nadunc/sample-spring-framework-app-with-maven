@@ -14,15 +14,15 @@ package com.avn.mvn01.model;
 
  */
 public class UserRole {
-    private int id;
+    private long id;
     private String description;
     private int status;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

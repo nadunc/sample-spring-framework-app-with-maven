@@ -16,10 +16,11 @@ import javax.sql.DataSource;
  */
 public interface EmployeeDAO {
 
-    public long save(final Employee employee) throws SQLException;
+    public long save(final Employee employee) throws Exception;
 
-    public void update(Employee employee) throws SQLException;
+    public void update(Employee employee) throws Exception;
 
-    public List<Employee> search(String key) throws SQLException;
+    public List<Employee> search(String key) throws Exception;
 
+    public Employee findById(long employeeId) throws Exception;
 }

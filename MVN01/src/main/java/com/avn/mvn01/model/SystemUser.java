@@ -14,33 +14,33 @@ package com.avn.mvn01.model;
 
  */
 public class SystemUser {
-    private int id;
-    private int employee_id;
-    private int user_role_id;
+    private long id;
+    private long employeeId;
+    private long userRoleId;
     private int status;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public int getUser_role_id() {
-        return user_role_id;
+    public long getUserRoleId() {
+        return userRoleId;
     }
 
-    public void setUser_role_id(int user_role_id) {
-        this.user_role_id = user_role_id;
+    public void setUserRoleId(long userRoleId) {
+        this.userRoleId = userRoleId;
     }
 
     public int getStatus() {
@@ -50,6 +50,7 @@ public class SystemUser {
     public void setStatus(int status) {
         this.status = status;
     }
-    
+
+   
     
 }
