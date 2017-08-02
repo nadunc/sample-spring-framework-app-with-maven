@@ -6,11 +6,9 @@
 package com.avn.mvn01.controller;
 
 import com.avn.mvn01.model.Employee;
-import com.avn.mvn01.service.EmployeeService;
+import com.avn.mvn01.service.employee.EmployeeService;
 import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -20,7 +18,7 @@ import org.springframework.stereotype.Controller;
  * @Created on 31/07/2017, 11:58:35 AM
  *
  */
-@Controller
+
 public class EmployeeController {
 
     @Autowired

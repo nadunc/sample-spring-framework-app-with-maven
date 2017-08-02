@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avn.mvn01.service;
+package com.avn.mvn01.service.employee;
 
 import com.avn.mvn01.model.Employee;
 import java.sql.SQLException;
-import javax.sql.DataSource;
 
 /**
  *
  * @author stephen.silver
  */
 public interface EmployeeService {
-    public Employee save(Employee employee) throws SQLException;
+    public long[] save(Employee employee) throws SQLException;
 }

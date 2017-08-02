@@ -12,11 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -25,18 +27,18 @@ import org.springframework.jdbc.support.KeyHolder;
  * @Created on 31/07/2017, 12:21:33 PM
  *
  */
+@Repository("employeeDAO")
 public class EmployeeDAOImpl implements EmployeeDAO {
 
+    @Autowired
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplateObject;
 
     @Override
-    public Employee save(final Employee employee) throws SQLException {
+    public long save(final Employee employee) throws SQLException {
         final String SQL = "INSERT INTO EMPLOYEE (name, status) values (?, ?)";
-//      jdbcTemplateObject.update( SQL, employee.getName(), employee.getStatus());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplateObject.update(
+        new JdbcTemplate(dataSource).update(
                 new PreparedStatementCreator() {
                     public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                         PreparedStatement ps = connection.prepareStatement(SQL, new String[]{"id"});
@@ -45,15 +47,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                         return ps;
                     }
                 }, keyHolder);
-        
-        employee.setId(keyHolder.getKey().intValue());
 
-        return employee;
+        return keyHolder.getKey().longValue();
     }
 
     @Override
-    public Employee update(Employee employee) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Employee employee) throws SQLException {
+        new JdbcTemplate().update("", new Object[]{employee.getName(), employee.getStatus()});
     }
 
     @Override
@@ -61,17 +61,4 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-    }
-
-    @Override
-    public void create(Employee employee) {
-        String SQL = "insert into Student (name, age) values (?, ?)";
-//      jdbcTemplateObject.update( SQL, name, age);
-//      System.out.println("Created Record Name = " + name + " Age = " + age);
-        return;
-    }
 }

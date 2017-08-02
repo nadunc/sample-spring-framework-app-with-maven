@@ -8,9 +8,7 @@ package com.avn.mvn01;
 import com.avn.mvn01.controller.EmployeeController;
 import com.avn.mvn01.model.Employee;
 import java.util.Scanner;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -21,18 +19,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  */
 public class App {
-        private static ApplicationContext context = new ClassPathXmlApplicationContext("SpringBeans.xml");
+
+    private static ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 
     public static void main(String[] args) {
 
-//        ApplicationContext context = new ClassPathXmlApplicationContext("SpringBeans.xml");
-
-//        EmployeeController employeeController = (EmployeeController) context.getBean("EmployeeController");
-//
-//        Employee emp = new Employee();
-//        emp.setName("Nadun");
-//        emp.setStatus(1);
-//        System.out.println(employeeController.addEmployee(emp));
         Scanner sc = new Scanner(System.in);
         boolean showMenu = true;
         do {
@@ -65,21 +56,23 @@ public class App {
             System.out.println();
         } while (showMenu);
     }
-    
-    private static void insertEmplpoyee(){
+
+    private static void insertEmplpoyee() {
         System.out.println("Insert");
-        
-        EmployeeController employeeController = (EmployeeController) context.getBean("EmployeeController");
+
+        EmployeeController employeeController = (EmployeeController) context.getBean("employeeController");
 //
         Employee emp = new Employee();
         emp.setName("Nadun");
         emp.setStatus(1);
         System.out.println(employeeController.addEmployee(emp));
     }
-    private static void updateEmployee(){
+
+    private static void updateEmployee() {
         System.out.println("Update");
     }
-    private static void searchEmployee(){
+
+    private static void searchEmployee() {
         System.out.println("Search");
     }
 }
