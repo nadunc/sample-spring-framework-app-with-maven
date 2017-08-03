@@ -8,6 +8,8 @@ package com.avn.mvn01.controller;
 import com.avn.mvn01.model.Employee;
 import com.avn.mvn01.service.employee.EmployeeService;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -50,5 +52,16 @@ public class EmployeeController {
         } catch (Exception e) {
             return "Employee update failed";
         }
+    }
+    
+    public List<Employee> search(String keyword){
+        List<Employee> employees =  new ArrayList<>();
+        try{
+            employees = employeeService.search(keyword);
+        }catch(Exception e){
+            System.out.println("Employee search failed");
+            System.out.println(e.getMessage());
+        }
+        return employees;
     }
 }

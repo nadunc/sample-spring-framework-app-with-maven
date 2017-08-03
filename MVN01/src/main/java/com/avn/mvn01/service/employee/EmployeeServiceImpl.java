@@ -10,6 +10,7 @@ import com.avn.mvn01.dao.systemuser.SystemUserDAO;
 import com.avn.mvn01.model.Employee;
 import com.avn.mvn01.model.SystemUser;
 import java.sql.SQLException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(Employee employee) throws Exception {
         employeeDAO.update(employee);
     }
+
+    @Override
+    public List<Employee> search(String keyword) throws Exception{
+       return employeeDAO.search(keyword);
+    }
+    
     
     
 

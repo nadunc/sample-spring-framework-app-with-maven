@@ -7,6 +7,7 @@ package com.avn.mvn01.service.employee;
 
 import com.avn.mvn01.model.Employee;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -18,4 +19,6 @@ public interface EmployeeService {
     public Employee findById(long employeeId) throws Exception;
     
     public void update(Employee employee) throws Exception;
+    
+    public List<Employee> search(String keyword) throws Exception;
 }

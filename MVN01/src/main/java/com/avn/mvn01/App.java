@@ -7,6 +7,7 @@ package com.avn.mvn01;
 
 import com.avn.mvn01.controller.EmployeeController;
 import com.avn.mvn01.model.Employee;
+import java.util.List;
 import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -86,5 +87,16 @@ public class App {
     
     private static void searchEmployee() {
         System.out.println("Search");
+        Scanner sc = new Scanner(System.in);
+        
+        EmployeeController employeeController = (EmployeeController) context.getBean("employeeController");
+        System.out.print("Enter search term: ");
+        String keyword = sc.next();
+        
+        List<Employee> employees = employeeController.search(keyword);
+        
+        for(Employee employee : employees){
+            System.out.println(employee.getId()+" : "+employee.getName());
+        }
     }
 }

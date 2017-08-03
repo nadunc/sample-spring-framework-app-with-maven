@@ -62,25 +62,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public List<Employee> search(String key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Employee> employees = new JdbcTemplate(dataSource).query(
+                "SELECT id, name, status, created_date, last_updated_date, created_user from employee where name LIKE ?",
+                new Object[]{"%"+key+"%"},
+                new EmployeeMapper());
+
+        return employees;
     }
 
     @Override
     public Employee findById(final long employeeId) throws Exception {
 
         Employee employee = new JdbcTemplate(dataSource).queryForObject(
-                "SELECT name, status, created_date, last_updated_date, created_user from employee where id = ?", new Object[]{employeeId},
-                new RowMapper<Employee>() {
-                    public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-                        Employee employee = new Employee();
-                        employee.setId(employeeId);
-                        employee.setName(rs.getString("name"));
-//                TODO
-//                actor.setLastName(rs.getString("last_name"));
-                        return employee;
-                    }
-                });
+                "SELECT id, name, status, created_date, last_updated_date, created_user from employee where id = ?", new Object[]{employeeId},
+                new EmployeeMapper());
 
         return employee;
     }
